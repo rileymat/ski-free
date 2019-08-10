@@ -2,6 +2,22 @@
 
 Welcome to the Ceros Code Challenge - Ski Edition!
 
+** Ceros Code Challenge - Ski Edition 2.0 ***
+
+*** Added Features ***
+ *
+ 
+*** Fixed Bugs ***
+ * Fixes game crash when turning left after crashing into an obstacle.
+ * After skier crashes turning both left or right will bring the skiier back up.
+ * Modified rectangle detection to include entire bounds of object.
+ * Skier can no longer go down through an obstacle.
+ 
+*** Known Bugs ***
+ * When moving up if the skiier crashes into an obstacle, the skiier will recover above the obstacle.
+
+
+
 For this challenge, we have included some base code for Ceros Ski, our version of the classic Windows game SkiFree. If
 you've never heard of SkiFree, Google has plenty of examples. Better yet, you can play our version here: 
 http://ceros-ski.herokuapp.com/  

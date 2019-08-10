@@ -42,7 +42,10 @@ export class Game {
 
         this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
 
-        this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
+        if(this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager))
+        {
+            this.skier.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+        }
     }
 
     drawGameWindow() {

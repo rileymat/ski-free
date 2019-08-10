@@ -60,19 +60,31 @@ export class Skier extends Entity {
     moveSkierUp() {
         this.y -= Constants.SKIER_STARTING_SPEED;
     }
+    
+    moveSkierToSaftey(obsticalManager, assetManager) {
+        while(this.checkIfSkierHitObstacle(obsticalManager, assetManager)) this.moveSkierUp();
+    }
 
-    turnLeft() {
+    turnLeft(obsticalManager, assetManager) {
         if(this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
             this.moveSkierLeft();
+        }
+        else if(this.direction === Constants.SKIER_DIRECTIONS.CRASH) {
+            this.setDirection(Constants.SKIER_DIRECTIONS.LEFT);
+            this.moveSkierToSaftey(obsticalManager, assetManager);
         }
         else {
             this.setDirection(this.direction - 1);
         }
     }
 
-    turnRight() {
+    turnRight(obsticalManager, assetManager) {
         if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
+        }
+        else if(this.direction === Constants.SKIER_DIRECTIONS.CRASH) {
+            this.setDirection(Constants.SKIER_DIRECTIONS.RIGHT)
+            this.moveSkierToSaftey(obsticalManager, assetManager);
         }
         else {
             this.setDirection(this.direction + 1);
@@ -86,10 +98,13 @@ export class Skier extends Entity {
     }
 
     turnDown() {
-        this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
+        if(this.direction !== Constants.SKIER_DIRECTIONS.CRASH)
+        {
+            this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
+        }
     }
-
-    checkIfSkierHitObstacle(obstacleManager, assetManager) {
+    
+   checkIfSkierHitObstacle(obstacleManager, assetManager) {
         const asset = assetManager.getAsset(this.assetName);
         const skierBounds = new Rect(
             this.x - asset.width / 2,
@@ -110,9 +125,6 @@ export class Skier extends Entity {
 
             return intersectTwoRects(skierBounds, obstacleBounds);
         });
-
-        if(collision) {
-            this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
-        }
+        return collision;
     };
 }
