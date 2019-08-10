@@ -66,11 +66,11 @@ export class Game {
     handleKeyDown(event) {
         switch(event.which) {
             case Constants.KEYS.LEFT:
-                this.skier.turnLeft();
+                this.skier.turnLeft(this.obstacleManager, this.assetManager);
                 event.preventDefault();
                 break;
             case Constants.KEYS.RIGHT:
-                this.skier.turnRight();
+                this.skier.turnRight(this.obstacleManager, this.assetManager);
                 event.preventDefault();
                 break;
             case Constants.KEYS.UP:
