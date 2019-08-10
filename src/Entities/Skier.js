@@ -104,25 +104,25 @@ export class Skier extends Entity {
         }
     }
     
-   checkIfSkierHitObstacle(obstacleManager, assetManager) {
+    checkIfSkierHitObstacle(obstacleManager, assetManager) {
         const asset = assetManager.getAsset(this.assetName);
         const skierBounds = new Rect(
             this.x - asset.width / 2,
             this.y - asset.height / 2,
             this.x + asset.width / 2,
-            this.y - asset.height / 4
+            this.y + asset.height / 2
         );
-
-        const collision = obstacleManager.getObstacles().find((obstacle) => {
+        const collision = obstacleManager.getObstacles().find((obstacle) =>
+        {
             const obstacleAsset = assetManager.getAsset(obstacle.getAssetName());
             const obstaclePosition = obstacle.getPosition();
+            
             const obstacleBounds = new Rect(
                 obstaclePosition.x - obstacleAsset.width / 2,
                 obstaclePosition.y - obstacleAsset.height / 2,
                 obstaclePosition.x + obstacleAsset.width / 2,
-                obstaclePosition.y
+                obstaclePosition.y + obstacleAsset.height / 2
             );
-
             return intersectTwoRects(skierBounds, obstacleBounds);
         });
         return collision;
