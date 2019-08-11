@@ -12,10 +12,15 @@ export const TREE = 'tree';
 export const TREE_CLUSTER = 'treeCluster';
 export const ROCK1 = 'rock1';
 export const ROCK2 = 'rock2';
+export const RHINO_STANDING = 'rhino';
+export const RHINO_RUN1 = 'rhinoRun1';
+export const RHINO_RUN2 = 'rhinoRun2';
 
 export const SKIER_STARTING_SPEED = 10;
 export const SKIER_DIAGONAL_SPEED_REDUCER = 1.4142;
 export const SKIER_JUMP_DISTANCE = 300;
+
+export const RHINO_SPEED = 50;
 
 export const ASSETS = {
     [SKIER_CRASH]: 'img/skier_crash.png',
@@ -28,14 +33,17 @@ export const ASSETS = {
     [TREE] : 'img/tree_1.png',
     [TREE_CLUSTER] : 'img/tree_cluster.png',
     [ROCK1] : 'img/rock_1.png',
-    [ROCK2] : 'img/rock_2.png'
+    [ROCK2] : 'img/rock_2.png',
+    [RHINO_STANDING] : 'img/rhino_default.png',
+    [RHINO_RUN1]: 'img/rhino_run_left.png',
+    [RHINO_RUN2]: 'img/rhino_run_left_2.png',
+    
 };
 
 export const JUMPABLE_ASSETS = {
     [ROCK1] : true,
     [ROCK2] : true
 };
-
 
 export const SKIER_STATE = {
     CRASH: 0,
@@ -74,8 +82,6 @@ export const SKIER_ASSET = {
         [SKIER_DIRECTIONS.RIGHT] : SKIER_JUMP
     }
 };
-
-
 
 export const KEYS = {
     LEFT : 37,
