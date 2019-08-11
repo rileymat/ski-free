@@ -150,5 +150,6 @@ export const KEYS = {
     RIGHT : 39,
     UP : 38,
     DOWN : 40,
-    JUMP: 32
+    JUMP: 32,
+    RESTART: 27
 };

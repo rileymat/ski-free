@@ -45,4 +45,12 @@ export class Canvas {
 
         this.ctx.drawImage(image, x, y, width, height);
     }
+
+    writeText(text, x , y)
+    {
+        x -= this.drawOffset.x;
+        y -= this.drawOffset.y;
+        this.ctx.font = "30px Arial";
+        this.ctx.fillText(text, x, y);
+    }
 }
