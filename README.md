@@ -6,7 +6,7 @@ Welcome to the Ceros Code Challenge - Ski Edition!
 
 *** Added Features ***
  * Skier can jump over rocks with the use of the space bar.
- * After 30 seconds a Rhino will appear at the bottom right corner of the window and chase skiier.
+ * After 30 seconds a Rhino will appear at the bottom right corner of the window and chase skier.
  
 *** Fixed Bugs ***
  * Fixes game crash when turning left after crashing into an obstacle.
