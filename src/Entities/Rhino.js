@@ -3,7 +3,7 @@ import { Entity } from "./Entity";
 import { intersectTwoRects, Rect } from "../Core/Utils";
 
 export class Rhino extends Entity {
-    assetName =  Constants.ASSETS.RHINO_STANDING;
+    assetName =  Constants.RHINO_STANDING;
     
     constructor(x, y) {
         super(x, y);
@@ -17,19 +17,19 @@ export class Rhino extends Entity {
         return Math.sqrt( xDelta*xDelta + yDelta*yDelta);
     }
 
-    calculateHuntingOffsets(skiierPosition, rhinoPosition)
+    calculateInterceptPosition(skierPosition, rhinoPosition)
     {
         let deltas = {};
-        if (rhinoPosition.y == skiierPosition.y) deltas={'x': Constants.RHINO_SPEED, 'y':0};
-        else if (rhinoPosition.x == skiierPosition.x) deltas={'x': 0, 'y': Constants.RHINO_SPEED};
+        if (rhinoPosition.y == skierPosition.y) deltas={'x': Constants.RHINO_SPEED, 'y':0};
+        else if (rhinoPosition.x == skierPosition.x) deltas={'x': 0, 'y': Constants.RHINO_SPEED};
         else {
-             let slope = (rhinoPosition.y - skiierPosition.y) / (rhinoPosition.x - skiierPosition.x);
+             let slope = (rhinoPosition.y - skierPosition.y) / (rhinoPosition.x - skierPosition.x);
              let xChange = (Constants.RHINO_SPEED / Math.sqrt(1 + (slope * slope))); 
              let yChange = slope * xChange;
              deltas = {'x':xChange, 'y': yChange};
         }
         let potentialRhinoPosition =  {'x':rhinoPosition.x + deltas.x, 'y': rhinoPosition.y + deltas.y};
-        if (this.calculateDistanceBetweenPoints(skiierPosition, rhinoPosition) > this.calculateDistanceBetweenPoints(skiierPosition,potentialRhinoPosition))
+        if (this.calculateDistanceBetweenPoints(skierPosition, rhinoPosition) > this.calculateDistanceBetweenPoints(skierPosition,potentialRhinoPosition))
         {
             return potentialRhinoPosition; 
         }
@@ -37,19 +37,21 @@ export class Rhino extends Entity {
     }
     
 
-    huntSkier(skiier)
+    huntSkier(skier)
     {
     
-        let skiierPosition = skier.getPosition();
+        let skierPosition = skier.getPosition();
         let rhinoPosition = this.getPosition();
-        if(this.calculateDistanceBetweenPoints(skiierPostion, rhinoPosition) < Constants.RHINO_SPEED)
+        if(this.calculateDistanceBetweenPoints(skierPosition, rhinoPosition) < Constants.RHINO_SPEED)
         {
-            this.x = skiierPosition.x;
-            this.y = skiierPosition.y;
+            this.x = skierPosition.x;
+            this.y = skierPosition.y;
         }
         else
         {
-            
+            let interceptPosition = this.calculateInterceptPosition(skierPosition, rhinoPosition);
+            this.x = interceptPosition.x;
+            this.y = interceptPosition.y  
         }
     }
 }
