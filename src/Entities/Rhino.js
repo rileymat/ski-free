@@ -24,8 +24,6 @@ export class Rhino extends Entity {
     updateAsset()
     {
         this.assetName = Constants.RHINO_ASSET[this.state][this.animationState];
-        console.log(Constants.RHINO_ASSET);
-        console.log('ASSET' + this.assetName + ' FOR ' + this.state + ' ' + this.animationState );
     }
 
 

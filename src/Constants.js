@@ -12,6 +12,7 @@ export const TREE = 'tree';
 export const TREE_CLUSTER = 'treeCluster';
 export const ROCK1 = 'rock1';
 export const ROCK2 = 'rock2';
+export const TRANSPARENT = 'transparent';
 
 export const RHINO_STANDING = 'rhino';
 export const RHINO_RUN1 = 'rhinoRun1';
@@ -33,6 +34,7 @@ export const SKIER_JUMP_DISTANCE = 300;
 export const RHINO_SPEED = 11;
 
 export const ASSETS = {
+    [TRANSPARENT]: 'img/transparent.png',
     [SKIER_CRASH]: 'img/skier_crash.png',
     [SKIER_JUMP]: 'img/skier_jump_1.png',
     [SKIER_LEFT]: 'img/skier_left.png',
@@ -135,11 +137,11 @@ export const SKIER_ASSET = {
         [SKIER_DIRECTIONS.RIGHT] : SKIER_JUMP
     },
     [SKIER_STATE.DEAD] : {
-        [SKIER_DIRECTIONS.LEFT] : SKIER_CRASH,
-        [SKIER_DIRECTIONS.LEFT_DOWN] : SKIER_CRASH, 
-        [SKIER_DIRECTIONS.DOWN] : SKIER_CRASH,
-        [SKIER_DIRECTIONS.RIGHT_DOWN] : SKIER_CRASH,
-        [SKIER_DIRECTIONS.RIGHT] : SKIER_CRASH
+        [SKIER_DIRECTIONS.LEFT] : TRANSPARENT,
+        [SKIER_DIRECTIONS.LEFT_DOWN] : TRANSPARENT, 
+        [SKIER_DIRECTIONS.DOWN] : TRANSPARENT,
+        [SKIER_DIRECTIONS.RIGHT_DOWN] : TRANSPARENT,
+        [SKIER_DIRECTIONS.RIGHT] : TRANSPARENT
     }
 };
 

@@ -18,6 +18,9 @@ Welcome to the Ceros Code Challenge - Ski Edition!
  * When moving up if the skiier crashes into an obstacle, the skiier will recover above the obstacle.
  * The skiier jumps further in case where the skier is going at a diagonal.
  * Rhino can run through objects.
+
+*** Issues ***
+ * Need to update loash dependency.
  
 
 
