@@ -42,16 +42,18 @@ export class Rhino extends Entity {
     
         let skierPosition = skier.getPosition();
         let rhinoPosition = this.getPosition();
-        if(this.calculateDistanceBetweenPoints(skierPosition, rhinoPosition) < Constants.RHINO_SPEED)
+        if(this.calculateDistanceBetweenPoints(skierPosition, rhinoPosition) <= Constants.RHINO_SPEED)
         {
             this.x = skierPosition.x;
             this.y = skierPosition.y;
+            return true;
         }
         else
         {
             let interceptPosition = this.calculateInterceptPosition(skierPosition, rhinoPosition);
             this.x = interceptPosition.x;
-            this.y = interceptPosition.y  
+            this.y = interceptPosition.y
+            return false;
         }
     }
 }
