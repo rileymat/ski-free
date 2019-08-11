@@ -41,8 +41,9 @@ export class ObstacleManager {
     }
 
     placeNewObstacle(gameWindow, previousGameWindow) {
+       
         const shouldPlaceObstacle = randomInt(1, NEW_OBSTACLE_CHANCE);
-        if(shouldPlaceObstacle !== NEW_OBSTACLE_CHANCE) {
+        if(shouldPlaceObstacle !== NEW_OBSTACLE_CHANCE || previousGameWindow == null) {
             return;
         }
 
@@ -59,7 +60,7 @@ export class ObstacleManager {
         else if(gameWindow.top > previousGameWindow.top) {
             this.placeObstacleBottom(gameWindow);
         }
-    };
+      };
 
     placeObstacleLeft(gameWindow) {
         this.placeRandomObstacle(gameWindow.left, gameWindow.left, gameWindow.top, gameWindow.bottom);

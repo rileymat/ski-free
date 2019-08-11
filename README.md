@@ -9,20 +9,22 @@ Welcome to the Ceros Code Challenge - Ski Edition!
  * After 30 seconds a Rhino will appear at the bottom right corner of the window and chase skier.
  
 *** Fixed Bugs ***
- * Fixes game crash when turning left after crashing into an obstacle.
+ * Game crash when turning left after crashing into an obstacle.
  * After skier crashes turning both left or right will bring the skiier back up.
  * Modified rectangle detection to include entire bounds of object.
  * Skier can no longer go down through an obstacle.
+ * On initial startup if a new obstacle was randomly selected to be placed, game would crash.
  
 *** Known Bugs ***
  * When moving up if the skiier crashes into an obstacle, the skiier will recover above the obstacle.
- * The skiier jumps further in case where the skier is going at a diagonal.
+ * The skiier jumps further in cases where the skier is going at a diagonal.
  * Rhino can run through objects.
 
 *** Issues ***
  * Need to update loash dependency.
  
 
+# Original README
 
 For this challenge, we have included some base code for Ceros Ski, our version of the classic Windows game SkiFree. If
 you've never heard of SkiFree, Google has plenty of examples. Better yet, you can play our version here: 
@@ -47,8 +49,8 @@ unclear, don't hesitate to reach out.
   and fix it.
   * Steps to Reproduce:
     1. Load the game
-    1. Crash into an obstacle
-    1. Press the left arrow key
+    2. Crash into an obstacle
+    3. Press the left arrow key
   * Expected Result: The skier gets up and is facing to the left
   * Actual Result: Giant blizzard occurs causing the screen to turn completely white (or maybe the game just crashes!)
   
