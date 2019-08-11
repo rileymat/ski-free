@@ -15,10 +15,17 @@ export class Rhino extends Entity {
         this.state = state;
         this.updateAsset();
     }
+    setAnimationState(animationState)
+    {
+        this.animationState = animationState;
+        this.updateAsset();
+    }
 
     updateAsset()
     {
         this.assetName = Constants.RHINO_ASSET[this.state][this.animationState];
+        console.log(Constants.RHINO_ASSET);
+        console.log('ASSET' + this.assetName + ' FOR ' + this.state + ' ' + this.animationState );
     }
 
 
@@ -76,6 +83,43 @@ export class Rhino extends Entity {
             this.y = interceptPosition.y;
             if(!this.runningAnimationTimeout) this.animateRunning();
             return false;
+        }
+    }
+    stopRunningAnimation()
+    {
+        if(this.runningAnimationTimeout){
+            console.log(this.runningAnimationTimeout);
+            clearTimeout(this.runningAnimationTimeout);
+            this.runningAnimationTimeout = null;
+         }
+    }
+
+    eatSkierAnimation(rhino)
+    {
+       if(!rhino.eatingAnimationTimeout) rhino.setAnimationState(Constants.RHINO_EATING_ANIMATE_STATE.RHINO_LIFT);
+       rhino.eatingAnimationTimeout = setTimeout( function()
+       {
+             if(rhino.animationState < Constants.RHINO_EATING_ANIMATE_STATE.RHINO_LIFT_EAT4)
+             {
+                rhino.setAnimationState(rhino.animationState + 1);
+                rhino.eatSkierAnimation(rhino);
+             }
+             else
+             {
+                rhino.eatingAnimationTimeout = null;
+             }
+       }, 1000);
+    }
+
+
+    eatSkier(skier)
+    {
+        this.setState(Constants.RHINO_STATE.EATING);
+        skier.die();
+
+        if(!this.eatingAnimationTimeout) {
+            this.stopRunningAnimation();
+            this.eatSkierAnimation(this);
         }
     }
 }

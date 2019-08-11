@@ -18,8 +18,7 @@ export class Game {
         setTimeout( function () {
                     game.rhino = new Rhino(game.gameWindow.right, game.gameWindow.bottom);
         }, 10000);
-        //this.rhino = new Rhino(5000, 5000);
-
+  
         this.obstacleManager = new ObstacleManager();
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
@@ -44,7 +43,13 @@ export class Game {
 
     updateGameWindow() {
         this.skier.move();
-        if(this.rhino) this.rhino.huntSkier(this.skier);
+        if(this.rhino)
+        {
+            if(this.rhino.huntSkier(this.skier))
+            {
+                this.rhino.eatSkier(this.skier);
+            }
+        }
 
         const previousGameWindow = this.gameWindow;
         this.calculateGameWindow();

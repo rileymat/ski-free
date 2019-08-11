@@ -141,6 +141,12 @@ export class Skier extends Entity {
         this.setState(Constants.SKIER_STATE.GROUND);
     }
     
+    die()
+    {
+        this.speed = 0;
+        this.setState(Constants.SKIER_STATE.DEAD);
+    }
+    
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
         const asset = assetManager.getAsset(this.assetName);
         const skierBounds = new Rect(

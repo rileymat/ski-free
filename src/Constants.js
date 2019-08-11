@@ -12,9 +12,19 @@ export const TREE = 'tree';
 export const TREE_CLUSTER = 'treeCluster';
 export const ROCK1 = 'rock1';
 export const ROCK2 = 'rock2';
+
 export const RHINO_STANDING = 'rhino';
 export const RHINO_RUN1 = 'rhinoRun1';
 export const RHINO_RUN2 = 'rhinoRun2';
+
+export const RHINO_LIFT = 'rhinoLift';
+export const RHINO_LIFT_OPEN_MOUTH = 'rhinoLiftOpenMouth';
+export const RHINO_LIFT_EAT1 = 'rhinoLiftEat1';
+export const RHINO_LIFT_EAT2 = 'rhinoLiftEat2';
+export const RHINO_LIFT_EAT3 = 'rhinoLiftEat3';
+export const RHINO_LIFT_EAT4 = 'rhinoLiftEat4';
+
+
 
 export const SKIER_STARTING_SPEED = 10;
 export const SKIER_DIAGONAL_SPEED_REDUCER = 1.4142;
@@ -37,8 +47,14 @@ export const ASSETS = {
     [RHINO_STANDING] : 'img/rhino_default.png',
     [RHINO_RUN1]: 'img/rhino_run_left.png',
     [RHINO_RUN2]: 'img/rhino_run_left_2.png',
-    
+	[RHINO_LIFT]: 'img/rhino_lift.png',
+	[RHINO_LIFT_OPEN_MOUTH]: 'img/rhino_lift_mouth_open.png',
+	[RHINO_LIFT_EAT1]: 'img/rhino_lift_eat_1.png',
+	[RHINO_LIFT_EAT2]: 'img/rhino_lift_eat_2.png',
+	[RHINO_LIFT_EAT3]: 'img/rhino_lift_eat_3.png',
+	[RHINO_LIFT_EAT4]: 'img/rhino_lift_eat_4.png'
 };
+
 
 export const JUMPABLE_ASSETS = {
     [ROCK1] : true,
@@ -57,20 +73,35 @@ export const RHINO_RUNNING_ANIMATE_STATE = {
    'RUN_LEFT2': 1
 }
 
+export const RHINO_EATING_ANIMATE_STATE = {
+	RHINO_LIFT: 0,
+	RHINO_LIFT_OPEN_MOUTH: 1,
+	RHINO_LIFT_EAT1: 2,
+	RHINO_LIFT_EAT2: 3,
+	RHINO_LIFT_EAT3: 4,
+	RHINO_LIFT_EAT4: 5,
+}
+
 export const RHINO_ASSET = {
     [RHINO_STATE.RUNNING] : {
         [RHINO_RUNNING_ANIMATE_STATE.RUN_LEFT1]: RHINO_RUN1,
         [RHINO_RUNNING_ANIMATE_STATE.RUN_LEFT2]: RHINO_RUN2
     },
-    [RHINO_STATE.STANDING] : { },
-    [RHINO_STATE.EATING]: {}
+    [RHINO_STATE.EATING]: {
+        [RHINO_EATING_ANIMATE_STATE.RHINO_LIFT]: RHINO_LIFT,
+	    [RHINO_EATING_ANIMATE_STATE.RHINO_LIFT_OPEN_MOUTH]: RHINO_LIFT_OPEN_MOUTH,
+	    [RHINO_EATING_ANIMATE_STATE.RHINO_LIFT_EAT1]: RHINO_LIFT_EAT1,
+	    [RHINO_EATING_ANIMATE_STATE.RHINO_LIFT_EAT2]: RHINO_LIFT_EAT2,
+	    [RHINO_EATING_ANIMATE_STATE.RHINO_LIFT_EAT3]: RHINO_LIFT_EAT3,
+	    [RHINO_EATING_ANIMATE_STATE.RHINO_LIFT_EAT4]: RHINO_LIFT_EAT4
+    }
 }
-
 
 export const SKIER_STATE = {
     CRASH: 0,
     AIR: 1,
-    GROUND: 2
+    GROUND: 2,
+    DEAD: 4
 };
 
 export const SKIER_DIRECTIONS = {
@@ -102,6 +133,13 @@ export const SKIER_ASSET = {
         [SKIER_DIRECTIONS.DOWN] : SKIER_JUMP,
         [SKIER_DIRECTIONS.RIGHT_DOWN] : SKIER_JUMP,
         [SKIER_DIRECTIONS.RIGHT] : SKIER_JUMP
+    },
+    [SKIER_STATE.DEAD] : {
+        [SKIER_DIRECTIONS.LEFT] : SKIER_CRASH,
+        [SKIER_DIRECTIONS.LEFT_DOWN] : SKIER_CRASH, 
+        [SKIER_DIRECTIONS.DOWN] : SKIER_CRASH,
+        [SKIER_DIRECTIONS.RIGHT_DOWN] : SKIER_CRASH,
+        [SKIER_DIRECTIONS.RIGHT] : SKIER_CRASH
     }
 };
 
