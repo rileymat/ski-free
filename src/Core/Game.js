@@ -13,7 +13,13 @@ export class Game {
         this.assetManager = new AssetManager();
         this.canvas = new Canvas(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
         this.skier = new Skier(0, 0);
-        this.rhino = new Rhino(5000, 5000);
+
+        var  game = this;
+        setTimeout( function () {
+                    game.rhino = new Rhino(game.gameWindow.right, game.gameWindow.bottom);
+        }, 10000);
+        //this.rhino = new Rhino(5000, 5000);
+
         this.obstacleManager = new ObstacleManager();
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
@@ -38,7 +44,7 @@ export class Game {
 
     updateGameWindow() {
         this.skier.move();
-        this.rhino.huntSkier(this.skier);
+        if(this.rhino) this.rhino.huntSkier(this.skier);
 
         const previousGameWindow = this.gameWindow;
         this.calculateGameWindow();
@@ -60,7 +66,7 @@ export class Game {
         this.canvas.setDrawOffset(this.gameWindow.left, this.gameWindow.top);
 
         this.skier.draw(this.canvas, this.assetManager);
-        this.rhino.draw(this.canvas, this.assetManager);
+        if(this.rhino) this.rhino.draw(this.canvas, this.assetManager);
         this.obstacleManager.drawObstacles(this.canvas, this.assetManager);
     }
 
