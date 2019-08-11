@@ -3,10 +3,22 @@ import { Entity } from "./Entity";
 import { intersectTwoRects, Rect } from "../Core/Utils";
 
 export class Rhino extends Entity {
-    assetName =  Constants.RHINO_STANDING;
+    assetName = Constants.RHINO_RUN1;
+    state = Constants.RHINO_STATE.RUNNING;
+    animationState = Constants.RHINO_RUNNING_ANIMATE_STATE.RUN_LEFT1;
     
     constructor(x, y) {
         super(x, y);
+    }
+
+    setState(state){
+        this.state = state;
+        this.updateAsset();
+    }
+
+    updateAsset()
+    {
+        this.assetName = Constants.RHINO_ASSET[this.state][this.animationState];
     }
 
 
@@ -36,10 +48,19 @@ export class Rhino extends Entity {
         return {'x':rhinoPosition.x-deltas.x, 'y':rhinoPosition.y - deltas.y};
     }
     
-
+    animateRunning()
+    {
+        let rhinoSprite = this;
+        this.runningAnimationTimeout = setTimeout( function() {
+            rhinoSprite.animationState = rhinoSprite.animationState ? 0 : 1;  //Toggle animation to simulate running
+            rhinoSprite.updateAsset();
+            rhinoSprite.animateRunning();
+            console.log("Setting Timeout");
+        }, 250)
+    }
+    
     huntSkier(skier)
     {
-    
         let skierPosition = skier.getPosition();
         let rhinoPosition = this.getPosition();
         if(this.calculateDistanceBetweenPoints(skierPosition, rhinoPosition) <= Constants.RHINO_SPEED)
@@ -52,7 +73,8 @@ export class Rhino extends Entity {
         {
             let interceptPosition = this.calculateInterceptPosition(skierPosition, rhinoPosition);
             this.x = interceptPosition.x;
-            this.y = interceptPosition.y
+            this.y = interceptPosition.y;
+            if(!this.runningAnimationTimeout) this.animateRunning();
             return false;
         }
     }

@@ -45,6 +45,28 @@ export const JUMPABLE_ASSETS = {
     [ROCK2] : true
 };
 
+
+export const RHINO_STATE = {
+   'STANDING': 0,
+   'RUNNING': 1,
+   'EATING': 3
+}
+
+export const RHINO_RUNNING_ANIMATE_STATE = {
+   'RUN_LEFT1': 0,
+   'RUN_LEFT2': 1
+}
+
+export const RHINO_ASSET = {
+    [RHINO_STATE.RUNNING] : {
+        [RHINO_RUNNING_ANIMATE_STATE.RUN_LEFT1]: RHINO_RUN1,
+        [RHINO_RUNNING_ANIMATE_STATE.RUN_LEFT2]: RHINO_RUN2
+    },
+    [RHINO_STATE.STANDING] : { },
+    [RHINO_STATE.EATING]: {}
+}
+
+
 export const SKIER_STATE = {
     CRASH: 0,
     AIR: 1,
