@@ -5,7 +5,7 @@ Welcome to the Ceros Code Challenge - Ski Edition!
 ** Ceros Code Challenge - Ski Edition 2.0 ***
 
 *** Added Features ***
- *
+ * Skier can jump over rocks with the use of the space bar.
  
 *** Fixed Bugs ***
  * Fixes game crash when turning left after crashing into an obstacle.
@@ -15,7 +15,7 @@ Welcome to the Ceros Code Challenge - Ski Edition!
  
 *** Known Bugs ***
  * When moving up if the skiier crashes into an obstacle, the skiier will recover above the obstacle.
-
+ * The skiier jumps further in case where the skier is going at a diagnal.
 
 
 For this challenge, we have included some base code for Ceros Ski, our version of the classic Windows game SkiFree. If

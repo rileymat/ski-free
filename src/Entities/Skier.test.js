@@ -13,14 +13,14 @@ assetManager.getAsset = ()=> ({'height': 10, 'width':10});
 
 test('Turn Left Turn When Crashed', async () => {
     let skier = new Skier(0,0);
-    skier.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+    skier.crash();
     skier.turnLeft(obstacleManager, assetManager);
     expect(skier.direction).toBe(Constants.SKIER_DIRECTIONS.LEFT);
 });
 
 test('Turn Right Turn When Crashed', async () => {
     let skier = new Skier(0,0);
-    skier.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+    skier.crash();
     skier.turnRight(obstacleManager, assetManager);
     expect(skier.direction).toBe(Constants.SKIER_DIRECTIONS.RIGHT);
 });

@@ -3,22 +3,28 @@ import { Entity } from "./Entity";
 import { intersectTwoRects, Rect } from "../Core/Utils";
 
 export class Skier extends Entity {
-    assetName = Constants.SKIER_DOWN;
 
+    state = Constants.SKIER_STATE.GROUND;
     direction = Constants.SKIER_DIRECTIONS.DOWN;
     speed = Constants.SKIER_STARTING_SPEED;
 
+    
     constructor(x, y) {
         super(x, y);
+        this.updateAsset();
     }
 
     setDirection(direction) {
         this.direction = direction;
         this.updateAsset();
     }
+    setState(state) {
+        this.state = state;
+        this.updateAsset();
+    }
 
     updateAsset() {
-        this.assetName = Constants.SKIER_DIRECTION_ASSET[this.direction];
+        this.assetName = Constants.SKIER_ASSET[this.state][this.direction];
     }
 
     move() {
@@ -66,11 +72,13 @@ export class Skier extends Entity {
     }
 
     turnLeft(obsticalManager, assetManager) {
-        if(this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
+        if(this.state === Constants.SKIER_STATE.GROUND && this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
             this.moveSkierLeft();
         }
-        else if(this.direction === Constants.SKIER_DIRECTIONS.CRASH) {
+        else if(this.state === Constants.SKIER_STATE.AIR){/*place for trick*/}
+        else if(this.state === Constants.SKIER_STATE.CRASH) {
             this.setDirection(Constants.SKIER_DIRECTIONS.LEFT);
+            this.setState(Constants.SKIER_STATE.GROUND);
             this.moveSkierToSaftey(obsticalManager, assetManager);
         }
         else {
@@ -79,11 +87,14 @@ export class Skier extends Entity {
     }
 
     turnRight(obsticalManager, assetManager) {
-        if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
+        
+        if(this.state === Constants.SKIER_STATE.GROUND && this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
         }
-        else if(this.direction === Constants.SKIER_DIRECTIONS.CRASH) {
-            this.setDirection(Constants.SKIER_DIRECTIONS.RIGHT)
+        else if(this.state === Constants.SKIER_STATE.AIR){/*place for trick*/}
+        else if(this.state === Constants.SKIER_STATE.CRASH) {
+            this.setDirection(Constants.SKIER_DIRECTIONS.RIGHT);
+            this.setState(Constants.SKIER_STATE.GROUND);
             this.moveSkierToSaftey(obsticalManager, assetManager);
         }
         else {
@@ -98,10 +109,36 @@ export class Skier extends Entity {
     }
 
     turnDown() {
-        if(this.direction !== Constants.SKIER_DIRECTIONS.CRASH)
+        if(this.state !== Constants.SKIER_STATE.CRASH)
         {
             this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
+            this.speed = Constants.SKIER_STARTING_SPEED;
         }
+    }
+
+    crash() {
+        this.setState(Constants.SKIER_STATE.CRASH);
+        this.speed = 0;
+    }
+    
+    jump() {
+        if(this.state !== Constants.SKIER_STATE.CRASH) {
+            this.setState(Constants.SKIER_STATE.AIR);
+            this.lastJumpLocation = this.getPosition().y;
+        }
+    }
+    
+    isInAir() {
+        return this.state === Constants.SKIER_STATE.AIR;
+    }
+    
+    checkIfSkierShouldLand() {
+        let currentPosition = this.getPosition().y;
+        return(currentPosition - this.lastJumpLocation > Constants.SKIER_JUMP_DISTANCE);
+    }
+    
+    land() {
+        this.setState(Constants.SKIER_STATE.GROUND);
     }
     
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
@@ -114,7 +151,12 @@ export class Skier extends Entity {
         );
         const collision = obstacleManager.getObstacles().find((obstacle) =>
         {
-            const obstacleAsset = assetManager.getAsset(obstacle.getAssetName());
+            const obstacleAssetName = obstacle.getAssetName();
+            if(this.isInAir() && Constants.JUMPABLE_ASSETS[obstacleAssetName]){
+                return false;
+            }
+            const obstacleAsset = assetManager.getAsset(obstacleAssetName);
+            
             const obstaclePosition = obstacle.getPosition();
             
             const obstacleBounds = new Rect(

@@ -42,9 +42,14 @@ export class Game {
 
         this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
 
+        if(this.skier.isInAir())
+        {
+            if(this.skier.checkIfSkierShouldLand()) this.skier.land();
+        }
+        
         if(this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager))
         {
-            this.skier.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+            this.skier.crash();
         }
     }
 
@@ -79,6 +84,10 @@ export class Game {
                 break;
             case Constants.KEYS.DOWN:
                 this.skier.turnDown();
+                event.preventDefault();
+                break;
+            case Constants.KEYS.JUMP:
+                this.skier.jump();
                 event.preventDefault();
                 break;
         }
