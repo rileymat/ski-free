@@ -76,6 +76,7 @@ export class Skier extends Entity {
             this.moveSkierLeft();
         }
         else if(this.state === Constants.SKIER_STATE.AIR){/*place for trick*/}
+        else if(this.state === Constants.SKIER_STATE.DEAD) {}
         else if(this.state === Constants.SKIER_STATE.CRASH) {
             this.setDirection(Constants.SKIER_DIRECTIONS.LEFT);
             this.setState(Constants.SKIER_STATE.GROUND);
@@ -92,6 +93,7 @@ export class Skier extends Entity {
             this.moveSkierRight();
         }
         else if(this.state === Constants.SKIER_STATE.AIR){/*place for trick*/}
+        else if(this.state === Constants.SKIER_STATE.DEAD) {}
         else if(this.state === Constants.SKIER_STATE.CRASH) {
             this.setDirection(Constants.SKIER_DIRECTIONS.RIGHT);
             this.setState(Constants.SKIER_STATE.GROUND);
@@ -103,13 +105,13 @@ export class Skier extends Entity {
     }
 
     turnUp() {
-        if(this.direction === Constants.SKIER_DIRECTIONS.LEFT || this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
+        if(this.state === Constants.SKIER_STATE.GROUND && (this.direction === Constants.SKIER_DIRECTIONS.LEFT || this.direction === Constants.SKIER_DIRECTIONS.RIGHT)) {
             this.moveSkierUp();
         }
     }
 
     turnDown() {
-        if(this.state !== Constants.SKIER_STATE.CRASH)
+        if(!(this.state === Constants.SKIER_STATE.CRASH || this.state == Constants.SKIER_STATE.DEAD))
         {
             this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
             this.speed = Constants.SKIER_STARTING_SPEED;
@@ -139,6 +141,16 @@ export class Skier extends Entity {
     
     land() {
         this.setState(Constants.SKIER_STATE.GROUND);
+    }
+    
+    die()
+    {
+        this.speed = 0;
+        this.setState(Constants.SKIER_STATE.DEAD);
+    }
+    isDead()
+    {
+        return (this.state === Constants.SKIER_STATE.DEAD);
     }
     
     checkIfSkierHitObstacle(obstacleManager, assetManager) {

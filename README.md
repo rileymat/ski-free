@@ -6,6 +6,7 @@ Welcome to the Ceros Code Challenge - Ski Edition!
 
 *** Added Features ***
  * Skier can jump over rocks with the use of the space bar.
+ * After 30 seconds a Rhino will appear at the bottom right corner of the window and chase skiier.
  
 *** Fixed Bugs ***
  * Fixes game crash when turning left after crashing into an obstacle.
@@ -15,7 +16,12 @@ Welcome to the Ceros Code Challenge - Ski Edition!
  
 *** Known Bugs ***
  * When moving up if the skiier crashes into an obstacle, the skiier will recover above the obstacle.
- * The skiier jumps further in case where the skier is going at a diagnal.
+ * The skiier jumps further in case where the skier is going at a diagonal.
+ * Rhino can run through objects.
+
+*** Issues ***
+ * Need to update loash dependency.
+ 
 
 
 For this challenge, we have included some base code for Ceros Ski, our version of the classic Windows game SkiFree. If
