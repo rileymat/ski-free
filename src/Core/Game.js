@@ -43,7 +43,7 @@ export class Game {
 
     updateGameWindow() {
         this.skier.move();
-        if(this.rhino)
+        if(this.rhino && !this.skier.isDead())
         {
             if(this.rhino.huntSkier(this.skier))
             {

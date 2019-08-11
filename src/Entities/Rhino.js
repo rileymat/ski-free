@@ -100,12 +100,13 @@ export class Rhino extends Entity {
              if(rhino.animationState < Constants.RHINO_EATING_ANIMATE_STATE.RHINO_LIFT_EAT4)
              {
                 rhino.setAnimationState(rhino.animationState + 1);
-                rhino.eatSkierAnimation(rhino);
              }
              else
              {
-                rhino.eatingAnimationTimeout = null;
+                //rhino.eatingAnimationTimeout = null;
+                rhino.setAnimationState(rhino.animationState -1);
              }
+             rhino.eatSkierAnimation(rhino);
        }, 1000);
     }
 
