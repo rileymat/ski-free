@@ -103,7 +103,6 @@ export class Rhino extends Entity {
              }
              else
              {
-                //rhino.eatingAnimationTimeout = null;
                 rhino.setAnimationState(rhino.animationState -1);
              }
              rhino.eatSkierAnimation(rhino);
