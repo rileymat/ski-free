@@ -14,7 +14,6 @@ export const ROCK1 = 'rock1';
 export const ROCK2 = 'rock2';
 export const TRANSPARENT = 'transparent';
 
-export const RHINO_STANDING = 'rhino';
 export const RHINO_RUN1 = 'rhinoRun1';
 export const RHINO_RUN2 = 'rhinoRun2';
 
@@ -47,7 +46,6 @@ export const ASSETS = {
     [TREE_CLUSTER] : 'img/tree_cluster.png',
     [ROCK1] : 'img/rock_1.png',
     [ROCK2] : 'img/rock_2.png',
-    [RHINO_STANDING] : 'img/rhino_default.png',
     [RHINO_RUN1]: 'img/rhino_run_left.png',
     [RHINO_RUN2]: 'img/rhino_run_left_2.png',
 	[RHINO_LIFT]: 'img/rhino_lift.png',
