@@ -89,7 +89,6 @@ export class Skier extends Entity {
     }
 
     turnRight(obstacleManager, assetManager) {
-        
         if(this.state === Constants.SKIER_STATE.GROUND && this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
         }
