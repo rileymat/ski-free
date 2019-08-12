@@ -64,6 +64,15 @@ export class Rhino extends Entity {
         }, 250)
     }
     
+    stopAnimateRunning()
+    {
+        if(this.runningAnimationTimeout){
+            console.log(this.runningAnimationTimeout);
+            clearTimeout(this.runningAnimationTimeout);
+            this.runningAnimationTimeout = null;
+         }
+    }
+    
     huntSkier(skier)
     {
         let skierPosition = skier.getPosition();
@@ -83,14 +92,6 @@ export class Rhino extends Entity {
             return false;
         }
     }
-    stopRunningAnimation()
-    {
-        if(this.runningAnimationTimeout){
-            console.log(this.runningAnimationTimeout);
-            clearTimeout(this.runningAnimationTimeout);
-            this.runningAnimationTimeout = null;
-         }
-    }
 
     eatSkierAnimation(rhino)
     {
@@ -109,14 +110,13 @@ export class Rhino extends Entity {
        }, 1000);
     }
 
-
     eatSkier(skier)
     {
         this.setState(Constants.RHINO_STATE.EATING);
         skier.die();
 
         if(!this.eatingAnimationTimeout) {
-            this.stopRunningAnimation();
+            this.stopAnimateRunning();
             this.eatSkierAnimation(this);
         }
     }
