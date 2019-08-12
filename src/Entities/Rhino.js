@@ -1,6 +1,6 @@
 import * as Constants from "../Constants";
 import { Entity } from "./Entity";
-import { intersectTwoRects, Rect, distanceBetweenPoints, pointBetweenTwoPointsAtDistance } from "../Core/Utils";
+import { intersectTwoRects, Rect, pointBetweenTwoPointsAtDistance } from "../Core/Utils";
 
 
 export class Rhino extends Entity {
@@ -25,11 +25,6 @@ export class Rhino extends Entity {
     updateAsset()
     {
         this.assetName = Constants.RHINO_ASSET[this.state][this.animationState];
-    }
-
-    calculateDistanceBetweenPoints(point1, point2)
-    {
-        return distanceBetweenPoints(point1, point2);
     }
 
     calculateInterceptPosition(skierPosition, rhinoPosition)
@@ -71,8 +66,9 @@ export class Rhino extends Entity {
         return (this.x == skier.x && this.y == skier.y);
     }
 
-    eatSkierAnimation(rhino)
+    animateEatSkier()
     {
+       let rhino = this;
        if(!rhino.eatingAnimationTimeout) rhino.setAnimationState(Constants.RHINO_EATING_ANIMATE_STATE.RHINO_LIFT);
        rhino.eatingAnimationTimeout = setTimeout( function()
        {
@@ -84,7 +80,7 @@ export class Rhino extends Entity {
              {
                 rhino.setAnimationState(rhino.animationState -1);
              }
-             rhino.eatSkierAnimation(rhino);
+             rhino.animateEatSkier();
        }, 1000);
     }
 
@@ -95,8 +91,13 @@ export class Rhino extends Entity {
 
         if(!this.eatingAnimationTimeout) {
             this.stopAnimateRunning();
-            this.eatSkierAnimation(this);
+            this.animateEatSkier();
         }
     }
+
+    isEating() {
+        return(this.state == Constants.RHINO_STATE.EATING);
+    }
+    
 }
 
