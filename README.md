@@ -1,8 +1,9 @@
 # Ceros Ski Code Challenge
 
 Welcome to the Ceros Code Challenge - Ski Edition!
-
 ** Ceros Code Challenge - Ski Edition 2.0 ***
+
+** Play live version at http://ski-free.oscmp.com/ **
 
 *** Added Features ***
  * Skier can jump over rocks with the use of the space bar.
@@ -24,6 +25,7 @@ Welcome to the Ceros Code Challenge - Ski Edition!
 
 *** Issues ***
  * Need to update loash dependency.
+ * Add https support to demo site.
 
 
 # Original README
