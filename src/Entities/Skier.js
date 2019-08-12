@@ -68,11 +68,11 @@ export class Skier extends Entity {
         this.y -= Constants.SKIER_STARTING_SPEED;
     }
     
-    moveSkierToSaftey(obsticalManager, assetManager) {
-        while(this.checkIfSkierHitObstacle(obsticalManager, assetManager)) this.moveSkierUp();
+    moveSkierToSaftey(obstacleManager, assetManager) {
+        while(this.checkIfSkierHitObstacle(obstacleManager, assetManager)) this.moveSkierUp();
     }
 
-    turnLeft(obsticalManager, assetManager) {
+    turnLeft(obstacleManager, assetManager) {
         if(this.state === Constants.SKIER_STATE.GROUND && this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
             this.moveSkierLeft();
         }
@@ -81,14 +81,14 @@ export class Skier extends Entity {
         else if(this.state === Constants.SKIER_STATE.CRASH) {
             this.setDirection(Constants.SKIER_DIRECTIONS.LEFT);
             this.setState(Constants.SKIER_STATE.GROUND);
-            this.moveSkierToSaftey(obsticalManager, assetManager);
+            this.moveSkierToSaftey(obstacleManager, assetManager);
         }
         else {
             this.setDirection(this.direction - 1);
         }
     }
 
-    turnRight(obsticalManager, assetManager) {
+    turnRight(obstacleManager, assetManager) {
         
         if(this.state === Constants.SKIER_STATE.GROUND && this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
@@ -98,7 +98,7 @@ export class Skier extends Entity {
         else if(this.state === Constants.SKIER_STATE.CRASH) {
             this.setDirection(Constants.SKIER_DIRECTIONS.RIGHT);
             this.setState(Constants.SKIER_STATE.GROUND);
-            this.moveSkierToSaftey(obsticalManager, assetManager);
+            this.moveSkierToSaftey(obstacleManager, assetManager);
         }
         else {
             this.setDirection(this.direction + 1);
