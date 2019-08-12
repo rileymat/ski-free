@@ -120,8 +120,8 @@ export class Skier extends Entity {
     }
 
     crash() {
-        this.setState(Constants.SKIER_STATE.CRASH);
         this.speed = 0;
+        this.setState(Constants.SKIER_STATE.CRASH);
     }
     
     jump() {
@@ -167,7 +167,6 @@ export class Skier extends Entity {
                 return false;
             }
             const obstacleBounds = obstacle.getAssetBounds(assetManager);
-
             return intersectTwoRects(skierBounds, obstacleBounds);
         });
         
