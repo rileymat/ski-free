@@ -44,7 +44,7 @@ test('Turn right when going down right', async () => {
     expect(skier.direction).toBe(Constants.SKIER_DIRECTIONS.RIGHT);
     let skierPosition = skier.getPosition();
     expect(skierPosition.y).toBe(0);
-    expect(skierPosition.x).teBeGeaterThan(0);
+    expect(skierPosition.x).toBeGreaterThan(0);
 });
 
 test('Turn left when going left', async () => {
