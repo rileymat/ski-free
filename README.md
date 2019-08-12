@@ -6,23 +6,25 @@ Welcome to the Ceros Code Challenge - Ski Edition!
 
 *** Added Features ***
  * Skier can jump over rocks with the use of the space bar.
- * After 30 seconds a Rhino will appear at the bottom right corner of the window and chase skier.
+ * After a code configurable number of seconds a Rhino will appear at the bottom right corner of the window and chase skier.
  
 *** Fixed Bugs ***
  * Game crash when turning left after crashing into an obstacle.
- * After skier crashes turning both left or right will bring the skiier back up.
+ * After skier crashes turning both left or right will bring the skier back up.
  * Modified rectangle detection to include entire bounds of object.
  * Skier can no longer go down through an obstacle.
  * On initial startup if a new obstacle was randomly selected to be placed, game would crash.
  
 *** Known Bugs ***
- * When moving up if the skiier crashes into an obstacle, the skiier will recover above the obstacle.
- * The skiier jumps further in cases where the skier is going at a diagonal.
+ * When moving up if the skier crashes into an obstacle, the skier will recover above the obstacle.
+ * The skier jumps further in cases where the skier is going at a diagonal.
  * Rhino can run through objects.
+ * Rhino can eat player in air.
+ * Rhino runs backwards (moon walks) when hunting skier from left.
 
 *** Issues ***
  * Need to update loash dependency.
- 
+
 
 # Original README
 

@@ -17,7 +17,7 @@ export class Game {
         var  game = this;
         setTimeout( function () {
                     game.rhino = new Rhino(game.gameWindow.right, game.gameWindow.bottom);
-        }, 10000);
+        }, Constants.SECONDS_UNTIL_RHINO * 1000);
   
         this.obstacleManager = new ObstacleManager();
 
