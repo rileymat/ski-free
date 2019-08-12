@@ -18,6 +18,7 @@ export class Skier extends Entity {
         this.direction = direction;
         this.updateAsset();
     }
+    
     setState(state) {
         this.state = state;
         this.updateAsset();
@@ -148,37 +149,28 @@ export class Skier extends Entity {
         this.speed = 0;
         this.setState(Constants.SKIER_STATE.DEAD);
     }
+    
     isDead()
     {
         return (this.state === Constants.SKIER_STATE.DEAD);
     }
-    
+
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
-        const asset = assetManager.getAsset(this.assetName);
-        const skierBounds = new Rect(
-            this.x - asset.width / 2,
-            this.y - asset.height / 2,
-            this.x + asset.width / 2,
-            this.y + asset.height / 2
-        );
+ 
+        const skierBounds = this.getAssetBounds(assetManager);
+           
         const collision = obstacleManager.getObstacles().find((obstacle) =>
         {
             const obstacleAssetName = obstacle.getAssetName();
+            
             if(this.isInAir() && Constants.JUMPABLE_ASSETS[obstacleAssetName]){
                 return false;
             }
-            const obstacleAsset = assetManager.getAsset(obstacleAssetName);
-            
-            const obstaclePosition = obstacle.getPosition();
-            
-            const obstacleBounds = new Rect(
-                obstaclePosition.x - obstacleAsset.width / 2,
-                obstaclePosition.y - obstacleAsset.height / 2,
-                obstaclePosition.x + obstacleAsset.width / 2,
-                obstaclePosition.y + obstacleAsset.height / 2
-            );
+            const obstacleBounds = obstacle.getAssetBounds(assetManager);
+
             return intersectTwoRects(skierBounds, obstacleBounds);
         });
+        
         return collision;
     };
 }
