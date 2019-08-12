@@ -11,6 +11,37 @@ export function intersectTwoRects(rect1, rect2) {
         rect2.bottom < rect1.top);
 }
 
+export function distanceBetweenPoints(point1, point2)
+{
+     const xDelta = point1.x - point2.x;
+     const yDelta = point1.y - point2.y;
+     return Math.sqrt(xDelta*xDelta + yDelta*yDelta);
+}
+
+export function pointBetweenTwoPointsAtDistance(startPoint, endPoint, distance)
+{
+        let deltas = {};
+        let currentDistanceBetweenPoints = distanceBetweenPoints(startPoint, endPoint);
+
+        if ( currentDistanceBetweenPoints < distance) return null; //current points are shorter than distance so there is no midpoint.
+        
+        if (startPoint.y == endPoint.y) deltas={'x': distance, 'y':0};
+        else if (startPoint.x == endPoint.x) deltas={'x': 0, 'y': distance};
+        else {
+             let slope = (startPoint.y - endPoint.y) / (startPoint.x - endPoint.x);
+             let xChange = (distance / Math.sqrt(1 + (slope * slope))); 
+             let yChange = slope * xChange;
+             deltas = {'x':xChange, 'y': yChange};
+        }
+        
+        let candidateMidPoint = {'x':startPoint.x + deltas.x, 'y': startPoint.y + deltas.y};
+        if (currentDistanceBetweenPoints < distanceBetweenPoints(endPoint, candidateMidPoint))
+        {
+            candidateMidPoint = {'x':startPoint.x - deltas.x, 'y': startPoint.y - deltas.y}
+        }
+        return candidateMidPoint;
+}
+
 export class Rect {
     left = 0;
     top = 0;
