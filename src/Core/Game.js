@@ -14,11 +14,6 @@ export class Game {
         this.canvas = new Canvas(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
         this.skier = new Skier(0, 0);
 
-        var  game = this;
-        setTimeout( function () {
-                    game.rhino = new Rhino(game.gameWindow.right, game.gameWindow.bottom);
-        }, Constants.SECONDS_UNTIL_RHINO * 1000);
-  
         this.obstacleManager = new ObstacleManager();
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
@@ -26,6 +21,10 @@ export class Game {
 
     init() {
         this.obstacleManager.placeInitialObstacles();
+        let game = this;
+        setTimeout( function () {
+            game.rhino = new Rhino(game.gameWindow.right, game.gameWindow.bottom);
+        }, Constants.SECONDS_UNTIL_RHINO * 1000);
     }
 
     async load() {
@@ -39,11 +38,6 @@ export class Game {
         this.drawGameWindow();
 
         requestAnimationFrame(this.run.bind(this));
-    }
-
-    drawGameOver()
-    {
-       this.canvas.writeText("GAME OVER (To restart, press the esc key)", this.gameWindow.left + 20, this.gameWindow.top + 50);
     }
 
     updateGameWindow() {
@@ -78,6 +72,11 @@ export class Game {
         if(this.rhino) this.rhino.draw(this.canvas, this.assetManager);
         this.obstacleManager.drawObstacles(this.canvas, this.assetManager);
         if(this.skier.isDead()) this.drawGameOver();
+    }
+
+    drawGameOver()
+    {
+       this.canvas.writeText("GAME OVER (To restart, press the esc key)", this.gameWindow.left + 20, this.gameWindow.top + 50, Constants.GAME_FONT);
     }
 
     calculateGameWindow() {

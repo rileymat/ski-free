@@ -152,3 +152,5 @@ export const KEYS = {
     JUMP: 32,
     RESTART: 27
 };
+
+export const GAME_FONT = "20px Arial";
